@@ -44,22 +44,26 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
         </div>
         
         {/* Numeric counter */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={count}
-            initial={{ x: 100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: -100, opacity: 0 }}
-            transition={{ 
-              type: "spring", 
-              stiffness: 200, 
-              damping: 20 
-            }}
-            className="text-white text-[10rem] sm:text-[12rem] md:text-[15rem] font-bold absolute"
-          >
-            {count}
-          </motion.div>
-        </AnimatePresence>
+        <div className="relative">
+          <AnimatePresence initial={false} mode="wait">
+            {count >= 1 && count <= 5 && (
+              <motion.div
+                key={`count-${count}`}
+                initial={{ x: 100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: -100, opacity: 0 }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 200, 
+                  damping: 20 
+                }}
+                className="text-white text-[10rem] sm:text-[12rem] md:text-[15rem] font-bold"
+              >
+                {count}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </motion.div>
   );
